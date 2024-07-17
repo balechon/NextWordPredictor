@@ -1,11 +1,6 @@
 import pandas as pd
-import numpy as np
-import os
-from pathlib import Path
 import re
-
-def get_the_main_path() -> Path:
-    return Path(__file__).resolve().parent
+from utils import get_the_main_path
 
 def load_data(name:str) -> pd.DataFrame:
     #if the name input have an extension, raise an error
