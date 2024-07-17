@@ -5,20 +5,22 @@ from pytorch_lightning.callbacks import ModelCheckpoint, TQDMProgressBar
 from pytorch_lightning.loggers import CSVLogger
 from utils import get_the_main_path
 from warnings import filterwarnings
-
+import  torch
 filterwarnings("ignore")
 
-NUM_EPOCHS = 5
+NUM_EPOCHS = 60
 BATCH_SIZE = 16
 LEARNING_RATE = 0.001
 HIDDEN_SIZE = 256
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 200
 NUM_LAYERS = 2
-LIMIT = 500
+LIMIT = 250
 NUM_WORKERS = 0
 
 
 def run():
+    torch.set_float32_matmul_precision('medium')
+
     main_path = get_the_main_path()
     data_path = main_path / "data" / "final"/ "ted_speech_clean.csv"
     save_dir = main_path / "logs"
@@ -29,7 +31,7 @@ def run():
     data_module = TextDataModule(
         data_path=data_path,
         batch_size=BATCH_SIZE,
-        sequence_length=50,  # Ajusta según tus necesidades
+        sequence_length=20,  # Ajusta según tus necesidades
         vocab_size=10000,  # Ajusta según tus necesidades
         limit=LIMIT,  # Ajusta según tus necesidades
         num_workers=NUM_WORKERS
@@ -87,5 +89,4 @@ def run():
 
 
 if __name__ == '__main__':
-
     run()

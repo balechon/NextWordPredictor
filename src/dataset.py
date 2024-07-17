@@ -5,9 +5,6 @@ import re
 
 import torch
 from torch.utils.data import DataLoader, Dataset, random_split
-import torch.optim as optim
-import torchmetrics
-
 import pandas as pd
 
 from nltk.tokenize import word_tokenize

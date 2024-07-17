@@ -146,4 +146,3 @@ cython_debug/
 # Lightning logs
 lightning_logs/
 logs/
-models/
