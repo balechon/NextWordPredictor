@@ -46,7 +46,6 @@ def load_model():
     )
 
     model.set_vocab(dataset.token_to_idx, dataset.idx_to_token)
-    # Verificar que el vocabulario se ha establecido correctamente
     print("Tamaño del vocabulario:", len(model.token_to_idx))
 
     return model
@@ -65,7 +64,7 @@ if __name__ == "__main__":
     model = load_model()
     while True:
         sequence = input("Ingrese la secuencia de palabras: ")
-        run(model,sequence, 5)
+        run(model,sequence, 2)
         print("\n")
 
 
