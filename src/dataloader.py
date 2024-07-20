@@ -1,7 +1,7 @@
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader, random_split
 import torch
-from dataset import TextDataset
+from src.dataset import TextDataset
 
 class TextDataModule(pl.LightningDataModule):
     def __init__(self, data_path, batch_size=32, sequence_length=128, limit=None,

@@ -1,16 +1,16 @@
-from dataloader import TextDataModule
-from model import LSTMNextWordPredictor
+from src.dataloader import TextDataModule
+from src.model import LSTMNextWordPredictor
+from src.utils import get_the_main_path
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, TQDMProgressBar
 from pytorch_lightning.loggers import CSVLogger
-from utils import get_the_main_path
 from warnings import filterwarnings
-import  torch
+import torch
 filterwarnings("ignore")
 
 NUM_EPOCHS = 60
 BATCH_SIZE = 16
-LEARNING_RATE = 0.001
+LEARNING_RATE = 0.0001
 HIDDEN_SIZE = 256
 EMBEDDING_DIM = 200
 NUM_LAYERS = 2
@@ -26,21 +26,19 @@ def run():
     save_dir = main_path / "logs"
     save_model_dir = main_path / "models"
     save_model_path = save_model_dir / "lstm_next_word_predictor.ckpt"
-
+    checkpoint_dir = main_path / "checkpoints"
 
     data_module = TextDataModule(
         data_path=data_path,
         batch_size=BATCH_SIZE,
-        sequence_length=20,  # Ajusta según tus necesidades
-        vocab_size=10000,  # Ajusta según tus necesidades
-        limit=LIMIT,  # Ajusta según tus necesidades
+        sequence_length=20,
+        vocab_size=10000,
+        limit=LIMIT,
         num_workers=NUM_WORKERS
     )
 
-    # Configurar el DataModule
-    data_module.setup()
 
-    # Obtener el tamaño del vocabulario
+    data_module.setup()
     vocab_size = data_module.get_vocab_size()
 
     # Crear el modelo
@@ -54,7 +52,7 @@ def run():
 
     # Callbacks
     checkpoint_callback = ModelCheckpoint(
-        dirpath='checkpoints',
+        dirpath=checkpoint_dir,
         filename='lstm-next-word-{epoch:02d}-{val_loss:.2f}',
         save_top_k=2,
         monitor='val_loss',

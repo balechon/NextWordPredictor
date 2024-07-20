@@ -1,8 +1,10 @@
-from LSTM import LSTM
+
+from src.LSTM import LSTM
 import pytorch_lightning as pl
 import torchmetrics
 import torch.nn.functional as F
 import torch
+
 
 class LSTMNextWordPredictor(pl.LightningModule):
     def __init__(self, vocab_size, embedding_dim, hidden_size, num_layers=1, learning_rate=0.001):

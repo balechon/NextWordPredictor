@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-from utils import get_the_main_path
+from src.utils import get_the_main_path
 
 def load_data(name:str) -> pd.DataFrame:
     #if the name input have an extension, raise an error
